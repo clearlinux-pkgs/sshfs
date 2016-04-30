@@ -4,7 +4,7 @@
 #
 Name     : sshfs
 Version  : 2.7
-Release  : 2
+Release  : 3
 URL      : https://github.com/libfuse/sshfs/releases/download/sshfs-2.7/sshfs-2.7.tar.gz
 Source0  : https://github.com/libfuse/sshfs/releases/download/sshfs-2.7/sshfs-2.7.tar.gz
 Summary  : No detailed summary available
