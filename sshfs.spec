@@ -4,7 +4,7 @@
 #
 Name     : sshfs
 Version  : 2.8
-Release  : 5
+Release  : 6
 URL      : https://github.com/libfuse/sshfs/releases/download/sshfs_2.8/sshfs-2.8.tar.gz
 Source0  : https://github.com/libfuse/sshfs/releases/download/sshfs_2.8/sshfs-2.8.tar.gz
 Summary  : No detailed summary available
