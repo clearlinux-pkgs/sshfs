@@ -4,7 +4,7 @@
 #
 Name     : sshfs
 Version  : 3.3.2
-Release  : 14
+Release  : 15
 URL      : https://github.com/libfuse/sshfs/archive/sshfs-3.3.2.tar.gz
 Source0  : https://github.com/libfuse/sshfs/archive/sshfs-3.3.2.tar.gz
 Summary  : No detailed summary available
