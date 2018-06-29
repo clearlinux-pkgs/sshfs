@@ -1,5 +1,5 @@
 PKG_NAME := sshfs
-URL = https://github.com/libfuse/sshfs/archive/sshfs-3.3.2.tar.gz
+URL = https://github.com/libfuse/sshfs/releases/download/sshfs-3.4.0/sshfs-3.4.0.tar.xz
 ARCHIVES = 
 
 include ../common/Makefile.common
