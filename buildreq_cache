@@ -1,2 +1,4 @@
-3.5.0
+3.5.1
+docutils
+fuse-dev
 pkgconfig(fuse3)
