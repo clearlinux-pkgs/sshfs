@@ -5,12 +5,12 @@
 # Source0 file verified with key 0xD113FCAC3C4E599F (Nikolaus@rath.org)
 #
 Name     : sshfs
-Version  : 3.5.1
-Release  : 19
-URL      : https://github.com/libfuse/sshfs/releases/download/sshfs-3.5.1/sshfs-3.5.1.tar.xz
-Source0  : https://github.com/libfuse/sshfs/releases/download/sshfs-3.5.1/sshfs-3.5.1.tar.xz
-Source99 : https://github.com/libfuse/sshfs/releases/download/sshfs-3.5.1/sshfs-3.5.1.tar.xz.asc
-Summary  : No detailed summary available
+Version  : 3.5.2
+Release  : 20
+URL      : https://github.com/libfuse/sshfs/releases/download/sshfs-3.5.2/sshfs-3.5.2.tar.xz
+Source0  : https://github.com/libfuse/sshfs/releases/download/sshfs-3.5.2/sshfs-3.5.2.tar.xz
+Source99 : https://github.com/libfuse/sshfs/releases/download/sshfs-3.5.2/sshfs-3.5.2.tar.xz.asc
+Summary  : FUSE client based on the SSH File Transfer Protocol
 Group    : Development/Tools
 License  : GPL-2.0
 Requires: sshfs-bin = %{version}-%{release}
@@ -20,6 +20,7 @@ BuildRequires : buildreq-meson
 BuildRequires : docutils
 BuildRequires : fuse-dev
 BuildRequires : pkgconfig(fuse)
+BuildRequires : pkgconfig(fuse3)
 BuildRequires : pkgconfig(gthread-2.0)
 
 %description
@@ -35,7 +36,6 @@ very simple to use - there's nothing to do on the server-side.
 Summary: bin components for the sshfs package.
 Group: Binaries
 Requires: sshfs-license = %{version}-%{release}
-Requires: sshfs-man = %{version}-%{release}
 
 %description bin
 bin components for the sshfs package.
@@ -58,14 +58,14 @@ man components for the sshfs package.
 
 
 %prep
-%setup -q -n sshfs-3.5.1
+%setup -q -n sshfs-3.5.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1545499170
+export SOURCE_DATE_EPOCH=1555201132
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --prefix /usr --buildtype=plain   builddir
 ninja -v -C builddir
 
