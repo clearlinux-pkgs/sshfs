@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xD113FCAC3C4E599F (Nikolaus@rath.org)
 #
 Name     : sshfs
-Version  : 3.5.2
-Release  : 20
-URL      : https://github.com/libfuse/sshfs/releases/download/sshfs-3.5.2/sshfs-3.5.2.tar.xz
-Source0  : https://github.com/libfuse/sshfs/releases/download/sshfs-3.5.2/sshfs-3.5.2.tar.xz
-Source99 : https://github.com/libfuse/sshfs/releases/download/sshfs-3.5.2/sshfs-3.5.2.tar.xz.asc
+Version  : 3.6.0
+Release  : 21
+URL      : https://github.com/libfuse/sshfs/releases/download/sshfs-3.6.0/sshfs-3.6.0.tar.xz
+Source0  : https://github.com/libfuse/sshfs/releases/download/sshfs-3.6.0/sshfs-3.6.0.tar.xz
+Source1 : https://github.com/libfuse/sshfs/releases/download/sshfs-3.6.0/sshfs-3.6.0.tar.xz.asc
 Summary  : FUSE client based on the SSH File Transfer Protocol
 Group    : Development/Tools
 License  : GPL-2.0
@@ -22,6 +22,7 @@ BuildRequires : fuse-dev
 BuildRequires : pkgconfig(fuse)
 BuildRequires : pkgconfig(fuse3)
 BuildRequires : pkgconfig(gthread-2.0)
+BuildRequires : util-linux
 
 %description
 SSHFS
@@ -58,20 +59,29 @@ man components for the sshfs package.
 
 
 %prep
-%setup -q -n sshfs-3.5.2
+%setup -q -n sshfs-3.6.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1555201132
-CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --prefix /usr --buildtype=plain   builddir
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1572798647
+# -Werror is for werrorists
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain   builddir
 ninja -v -C builddir
 
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/sshfs
-cp COPYING %{buildroot}/usr/share/package-licenses/sshfs/COPYING
+cp %{_builddir}/sshfs-3.6.0/COPYING %{buildroot}/usr/share/package-licenses/sshfs/4cc77b90af91e615a64ae04893fdffa7939db84c
 DESTDIR=%{buildroot} ninja -C builddir install
 
 %files
@@ -85,7 +95,7 @@ DESTDIR=%{buildroot} ninja -C builddir install
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/sshfs/COPYING
+/usr/share/package-licenses/sshfs/4cc77b90af91e615a64ae04893fdffa7939db84c
 
 %files man
 %defattr(0644,root,root,0755)
