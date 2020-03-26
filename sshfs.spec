@@ -6,11 +6,11 @@
 #
 Name     : sshfs
 Version  : 3.7.0
-Release  : 22
+Release  : 23
 URL      : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.0/sshfs-3.7.0.tar.xz
 Source0  : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.0/sshfs-3.7.0.tar.xz
 Source1  : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.0/sshfs-3.7.0.tar.xz.asc
-Summary  : FUSE client based on the SSH File Transfer Protocol
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
 Requires: sshfs-bin = %{version}-%{release}
@@ -22,6 +22,7 @@ BuildRequires : fuse-dev
 BuildRequires : pkgconfig(fuse)
 BuildRequires : pkgconfig(fuse3)
 BuildRequires : pkgconfig(gthread-2.0)
+BuildRequires : util-linux
 
 %description
 SSHFS
@@ -66,8 +67,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1578160128
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1585262860
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -83,15 +83,18 @@ ninja -v -C builddir
 mkdir -p %{buildroot}/usr/share/package-licenses/sshfs
 cp %{_builddir}/sshfs-3.7.0/COPYING %{buildroot}/usr/share/package-licenses/sshfs/4cc77b90af91e615a64ae04893fdffa7939db84c
 DESTDIR=%{buildroot} ninja -C builddir install
+## install_append content
+mv %{buildroot}/usr/sbin/* %{buildroot}/usr/bin/
+## install_append end
 
 %files
 %defattr(-,root,root,-)
 
 %files bin
 %defattr(-,root,root,-)
+/usr/bin/mount.fuse.sshfs
+/usr/bin/mount.sshfs
 /usr/bin/sshfs
-/usr/sbin/mount.fuse.sshfs
-/usr/sbin/mount.sshfs
 
 %files license
 %defattr(0644,root,root,0755)

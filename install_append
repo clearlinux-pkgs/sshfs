@@ -1,0 +1,1 @@
+mv %{buildroot}/usr/sbin/* %{buildroot}/usr/bin/
