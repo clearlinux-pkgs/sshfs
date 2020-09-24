@@ -6,7 +6,7 @@
 #
 Name     : sshfs
 Version  : 3.7.0
-Release  : 23
+Release  : 24
 URL      : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.0/sshfs-3.7.0.tar.xz
 Source0  : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.0/sshfs-3.7.0.tar.xz
 Source1  : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.0/sshfs-3.7.0.tar.xz.asc
