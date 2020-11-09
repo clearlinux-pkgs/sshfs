@@ -1,5 +1,3 @@
-3.7.0
-docutils
+3.7.1
 fuse-dev
 pkgconfig(fuse3)
-util-linux

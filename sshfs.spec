@@ -5,24 +5,21 @@
 # Source0 file verified with key 0xD113FCAC3C4E599F (Nikolaus@rath.org)
 #
 Name     : sshfs
-Version  : 3.7.0
-Release  : 24
-URL      : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.0/sshfs-3.7.0.tar.xz
-Source0  : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.0/sshfs-3.7.0.tar.xz
-Source1  : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.0/sshfs-3.7.0.tar.xz.asc
+Version  : 3.7.1
+Release  : 25
+URL      : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.1/sshfs-3.7.1.tar.xz
+Source0  : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.1/sshfs-3.7.1.tar.xz
+Source1  : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.1/sshfs-3.7.1.tar.xz.asc
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
 Requires: sshfs-bin = %{version}-%{release}
 Requires: sshfs-license = %{version}-%{release}
-Requires: sshfs-man = %{version}-%{release}
 BuildRequires : buildreq-meson
-BuildRequires : docutils
 BuildRequires : fuse-dev
 BuildRequires : pkgconfig(fuse)
 BuildRequires : pkgconfig(fuse3)
 BuildRequires : pkgconfig(gthread-2.0)
-BuildRequires : util-linux
 
 %description
 SSHFS
@@ -50,38 +47,30 @@ Group: Default
 license components for the sshfs package.
 
 
-%package man
-Summary: man components for the sshfs package.
-Group: Default
-
-%description man
-man components for the sshfs package.
-
-
 %prep
-%setup -q -n sshfs-3.7.0
-cd %{_builddir}/sshfs-3.7.0
+%setup -q -n sshfs-3.7.1
+cd %{_builddir}/sshfs-3.7.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1585262860
+export SOURCE_DATE_EPOCH=1604941458
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain   builddir
 ninja -v -C builddir
 
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/sshfs
-cp %{_builddir}/sshfs-3.7.0/COPYING %{buildroot}/usr/share/package-licenses/sshfs/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/sshfs-3.7.1/COPYING %{buildroot}/usr/share/package-licenses/sshfs/4cc77b90af91e615a64ae04893fdffa7939db84c
 DESTDIR=%{buildroot} ninja -C builddir install
 ## install_append content
 mv %{buildroot}/usr/sbin/* %{buildroot}/usr/bin/
@@ -99,7 +88,3 @@ mv %{buildroot}/usr/sbin/* %{buildroot}/usr/bin/
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/sshfs/4cc77b90af91e615a64ae04893fdffa7939db84c
-
-%files man
-%defattr(0644,root,root,0755)
-/usr/share/man/man1/sshfs.1
