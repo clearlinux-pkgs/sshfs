@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xD113FCAC3C4E599F (Nikolaus@rath.org)
 #
 Name     : sshfs
-Version  : 3.7.1
-Release  : 25
-URL      : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.1/sshfs-3.7.1.tar.xz
-Source0  : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.1/sshfs-3.7.1.tar.xz
-Source1  : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.1/sshfs-3.7.1.tar.xz.asc
+Version  : 3.7.2
+Release  : 26
+URL      : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.2/sshfs-3.7.2.tar.xz
+Source0  : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.2/sshfs-3.7.2.tar.xz
+Source1  : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.2/sshfs-3.7.2.tar.xz.asc
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
@@ -48,15 +48,15 @@ license components for the sshfs package.
 
 
 %prep
-%setup -q -n sshfs-3.7.1
-cd %{_builddir}/sshfs-3.7.1
+%setup -q -n sshfs-3.7.2
+cd %{_builddir}/sshfs-3.7.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1604941458
+export SOURCE_DATE_EPOCH=1623165061
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -70,7 +70,7 @@ ninja -v -C builddir
 
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/sshfs
-cp %{_builddir}/sshfs-3.7.1/COPYING %{buildroot}/usr/share/package-licenses/sshfs/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/sshfs-3.7.2/COPYING %{buildroot}/usr/share/package-licenses/sshfs/4cc77b90af91e615a64ae04893fdffa7939db84c
 DESTDIR=%{buildroot} ninja -C builddir install
 ## install_append content
 mv %{buildroot}/usr/sbin/* %{buildroot}/usr/bin/
