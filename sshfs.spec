@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xD113FCAC3C4E599F (Nikolaus@rath.org)
 #
 Name     : sshfs
-Version  : 3.7.2
-Release  : 26
-URL      : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.2/sshfs-3.7.2.tar.xz
-Source0  : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.2/sshfs-3.7.2.tar.xz
-Source1  : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.2/sshfs-3.7.2.tar.xz.asc
+Version  : 3.7.3
+Release  : 27
+URL      : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.3/sshfs-3.7.3.tar.xz
+Source0  : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.3/sshfs-3.7.3.tar.xz
+Source1  : https://github.com/libfuse/sshfs/releases/download/sshfs-3.7.3/sshfs-3.7.3.tar.xz.asc
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
@@ -22,13 +22,10 @@ BuildRequires : pkgconfig(fuse3)
 BuildRequires : pkgconfig(gthread-2.0)
 
 %description
-SSHFS
-=====
-About
------
-SSHFS allows you to mount a remote filesystem using SFTP. Most SSH
-servers support and enable this SFTP access by default, so SSHFS is
-very simple to use - there's nothing to do on the server-side.
+This Project is Orphaned
+========================
+This project is no longer maintained or developed. Github issue tracking and pull requests have
+therefore been disabled. The mailing list (see below) is still available for use.
 
 %package bin
 Summary: bin components for the sshfs package.
@@ -48,29 +45,29 @@ license components for the sshfs package.
 
 
 %prep
-%setup -q -n sshfs-3.7.2
-cd %{_builddir}/sshfs-3.7.2
+%setup -q -n sshfs-3.7.3
+cd %{_builddir}/sshfs-3.7.3
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1623165061
+export SOURCE_DATE_EPOCH=1653583832
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain   builddir
 ninja -v -C builddir
 
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/sshfs
-cp %{_builddir}/sshfs-3.7.2/COPYING %{buildroot}/usr/share/package-licenses/sshfs/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/sshfs-3.7.3/COPYING %{buildroot}/usr/share/package-licenses/sshfs/4cc77b90af91e615a64ae04893fdffa7939db84c
 DESTDIR=%{buildroot} ninja -C builddir install
 ## install_append content
 mv %{buildroot}/usr/sbin/* %{buildroot}/usr/bin/
